@@ -8,21 +8,16 @@ import { apiClient } from '../../clients';
 const isLoading = ref<boolean>(true);
 const searchRef = ref<string>('');
 const searchDebounced = refDebounced(searchRef, 500);
-const transactions = ref<Transaction[]>([{
-  id: 'random-uuid',
-  accountName: 'tester',
-  type: 'pix',
-  value: '10.20',
-}]);
+const transactions = ref<Transaction[]>([]);
 
-const loadTransactions = async (search?: string): Promise<void> => {
+const loadTransactions = async (search: string = ""): Promise<void> => {
   try {
     isLoading.value = true;
     const { data: apiTransactions } = await apiClient.request<Transaction[]>({
       method: 'get',
       url: 'transactions',
       params: {
-        search: search && search.length > 3 ? search : null,
+        search,
       },
     });
     transactions.value = apiTransactions;
