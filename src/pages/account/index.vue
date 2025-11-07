@@ -42,25 +42,43 @@ watch(searchDebounced, async (newValue, _) => {
 </script>
 
 <template>
-  <h1>Transactions</h1>
-  <v-text-field
-    v-model="searchRef"
-    label="Search transactions"
-    variant="outlined"
-    hide-details
-    single-line
-  ></v-text-field>
-  <ul>
-    <v-progress-circular
-      v-if="isLoading"
-      indeterminate
-      :size="48"
-    ></v-progress-circular>
-    <li v-else v-for="transaction in transactions">
-      {{ transaction.accountName }}<br/>
-      {{ transaction.status }}<br/>
-      {{ transaction.type }}<br/>
-      {{ transaction.value }}<br/>
-    </li>
-  </ul>
+  <v-container>
+    <v-row class="text-center">
+      <v-col cols="12">
+        <h1 class="justify-center">Transactions</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <main class="mt-2">
+          <v-text-field
+            v-model="searchRef"
+            label="Search transactions"
+            variant="outlined"
+            hide-details
+            single-line
+          ></v-text-field>
+          <v-card class="overflow-y-auto" min-height="75vh" max-height="75vh">
+            <section class="mt-2">
+              <ul class="h-2 overflow-auto">
+                <v-progress-circular
+                  v-if="isLoading"
+                  indeterminate
+                  :size="48"
+                ></v-progress-circular>
+                <li v-else v-for="transaction in transactions">
+                  <v-card-text>
+                    <h3>{{ transaction.accountName }}</h3><br/>
+                    {{ transaction.status }}<br/>
+                    {{ transaction.type }}<br/>
+                    {{ transaction.value }}<br/>
+                  </v-card-text>
+                </li>
+              </ul>
+            </section>
+          </v-card>
+        </main>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
