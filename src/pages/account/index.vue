@@ -63,6 +63,7 @@ watch(searchDebounced, async (newValue, _) => {
     ></v-progress-circular>
     <li v-else v-for="transaction in transactions">
       {{ transaction.accountName }}<br/>
+      {{ transaction.status }}<br/>
       {{ transaction.type }}<br/>
       {{ transaction.value }}<br/>
     </li>
