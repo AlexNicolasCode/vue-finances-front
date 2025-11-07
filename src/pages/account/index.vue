@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { refDebounced } from '@vueuse/core';
+import BackToHomeButton from '../../components/back-to-home-button.vue';
 
 import type { Transaction } from './types';
 import { apiClient } from '../../clients';
@@ -43,6 +44,11 @@ watch(searchDebounced, async (newValue, _) => {
 
 <template>
   <v-container>
+    <v-row>
+      <v-col>
+        <BackToHomeButton />
+      </v-col>
+    </v-row>
     <v-row class="text-center">
       <v-col cols="12">
         <h1 class="justify-center">Transactions</h1>
@@ -58,7 +64,7 @@ watch(searchDebounced, async (newValue, _) => {
             hide-details
             single-line
           ></v-text-field>
-          <v-card class="overflow-y-auto" min-height="75vh" max-height="75vh">
+          <v-card class="overflow-y-auto" min-height="65vh" max-height="65vh">
             <section class="mt-2">
               <ul class="h-2 overflow-auto">
                 <v-progress-circular
